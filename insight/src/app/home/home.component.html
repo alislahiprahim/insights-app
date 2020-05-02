@@ -1,0 +1,11 @@
+<div class="container" *ngFor="let i of imageArr">
+    <div class="card-columns">
+        <div class="card "> <img class="card-img-top" src="{{i.Url}}" alt="Card image cap">
+            <div class="cover">
+                <h5 class="date">{{i.date |date:'shortDate'}}</h5>
+                <button class="float-right" mat-flat-button color=accent [routerLink]="['/specials']" routerLinkActive="router-link-active" >special content</button>
+            </div>
+        </div>
+
+    </div>
+</div>

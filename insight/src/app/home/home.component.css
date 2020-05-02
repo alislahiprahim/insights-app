@@ -1,0 +1,63 @@
+body {
+    padding: 2em;
+    transition: all .1s ease-in;
+
+}
+
+.card {
+    border: none;
+    transition: all .3s ease-in;
+    overflow: hidden;
+}
+
+img, .card-img-top {
+    border-radius: 0em;
+    transition: all .3s ease-in;
+}
+
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(42,63,85,0.7);
+    z-index: 123;
+    opacity: 0;
+    overflow: hidden;
+    transition: all .3s ease-in;
+}
+.cover .date{
+    position: relative;
+    top: 70%;
+    left: 60%;
+    color: white;
+
+}
+.card:hover>.cover {
+    opacity: 1;
+}
+
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 5;
+    }
+}
