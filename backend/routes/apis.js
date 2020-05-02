@@ -71,12 +71,12 @@ router.post('/login', (req, resp) => {
 
 router.post("/uploadImage", (req, resp) => {
 
-    const { imageURL } = req.body
-
+    const { Url } = req.body
+    
     const image = new imageModel({
 
         _id: mongoose.Types.ObjectId(),
-        Url: imageURL,
+        Url: Url,
 
     })
     image.save((err, data) => {

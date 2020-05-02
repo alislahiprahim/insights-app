@@ -18,10 +18,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { userService } from './services/user.service';
-import { UploadService } from './services/upload-file.service';
 import { AuthGuard } from './guard/auth.guard';
 import { SpecialsComponent } from './specials/specials.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { DropzoneDirective } from './directives/dropzone.directive';
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -35,7 +36,9 @@ firebase.initializeApp(environment.firebaseConfig);
     LoginComponent,
     UploadImageComponent,
     UserProfileComponent,
-    SpecialsComponent
+    SpecialsComponent,
+    DropzoneDirective,
+    UploadTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireStorageModule,
 
   ],
-  providers: [userService, UploadService, AuthGuard, {
+  providers: [userService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

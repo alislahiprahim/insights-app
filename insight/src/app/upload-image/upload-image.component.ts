@@ -1,38 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../services/upload-file.service';
 import { UploadModelModule } from '../upload-model/upload.module';
 
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
-  styleUrls: ['./upload-image.component.css']
+  styleUrls: ['./upload-image.component.scss']
 })
 export class UploadImageComponent implements OnInit {
 
-  constructor(private myUploadService: UploadService) { }
+  constructor() { }
 
-  images: any
-  currentUpload: UploadModelModule;
+  isHovering: boolean;
+
+  files: File[] = [];
 
   ngOnInit() {
   }
 
-  selectImage(event) {
-
-    const file = event.target.files[0];
-    this.images = file;
-
-    this.currentUpload = new UploadModelModule(this.images);
-    console.log('1', this.currentUpload)
 
 
+  toggleHover(event: boolean) {
+    this.isHovering = event;
   }
 
-  onSubmit() {
-    this.myUploadService.pushUpload(this.currentUpload)
-
+  onDrop(files: FileList) {
+    for (let i = 0; i < files.length; i++) {
+      this.files.push(files.item(i));
+    }
   }
-
-
 }
+
+
 
