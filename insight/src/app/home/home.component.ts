@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VeiwImageComponent } from '../veiw-image/veiw-image.component';
-import lodash from 'lodash'
 
 export interface DialogData {
   imageUrl: string
@@ -40,26 +39,25 @@ export class HomeComponent implements OnInit {
 
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status === 401) {
-          this.myRouter.navigate(['/login'])
-        }
+
       }
     })
   }
 
   openDialog(url): void {
 
-    const dialogRef = this.dialog.open(VeiwImageComponent, {
+    this.dialog.open(VeiwImageComponent, {
       data: { imageUrl: url }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   userProfile(userid) {
     this.myRouter.navigate(['/profile', userid])
+  }
+
+  OnRightClick() {
+    return false;
   }
 }
 

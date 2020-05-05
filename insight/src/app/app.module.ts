@@ -19,12 +19,12 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { userService } from './services/user.service';
 import { AuthGuard } from './guard/auth.guard';
-import { SpecialsComponent } from './specials/specials.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { DropzoneDirective } from './directives/dropzone.directive';
 import { UploadTaskComponent } from './upload-task/upload-task.component';
 import { VeiwImageComponent } from './veiw-image/veiw-image.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -38,7 +38,6 @@ firebase.initializeApp(environment.firebaseConfig);
     LoginComponent,
     UploadImageComponent,
     UserProfileComponent,
-    SpecialsComponent,
     DropzoneDirective,
     UploadTaskComponent,
     VeiwImageComponent
@@ -66,6 +65,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     MatDialogModule,
+    NgbModule,
 
   ],
   providers: [userService, AuthGuard, {
@@ -74,6 +74,6 @@ firebase.initializeApp(environment.firebaseConfig);
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [VeiwImageComponent]
+  entryComponents: [VeiwImageComponent, UploadImageComponent]
 })
 export class AppModule { }

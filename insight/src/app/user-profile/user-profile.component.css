@@ -1,7 +1,8 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
 }
+
 .image {
     width: 100%;
     height: 500px;
@@ -12,4 +13,12 @@
 
 .card-image {
     position: relative;
+}
+
+.heart {
+    color: black
+}
+
+.heartRed {
+    color: red;
 }

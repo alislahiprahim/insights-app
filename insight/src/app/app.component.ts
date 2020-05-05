@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { userService } from './services/user.service';
+import { MatDialog } from '@angular/material';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,10 @@ import { userService } from './services/user.service';
 })
 export class AppComponent {
 
-  constructor(private myuserService: userService) { }
+  constructor(private myuserService: userService, private dialog: MatDialog) { }
 
 
+  openDialog() {
+    this.dialog.open(UploadImageComponent)
+  }
 }

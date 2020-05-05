@@ -80,7 +80,7 @@ router.post("/uploadImage", verifyToken, async (req, resp) => {
 
 });
 
-router.get('/getImages', verifyToken, (req, resp) => {
+router.get('/getImages', (req, resp) => {
 
     userModel.find({}).exec((err, data) => {
         err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })
@@ -98,5 +98,25 @@ router.post('/getUserImages', verifyToken, (req, resp) => {
     })
 
 })
+
+// router.post('/rate', verifyToken, (req, resp) => {
+
+//     const { userId, imageid, r } = req.body
+
+//     userModel.findOne({ _id: userId }).exec((err, userData) => {
+//         lodash.filter(userData.image, (i) => {
+//             () => {
+//                 if (imageid == i._id) {
+//                     i.rating = i.rating + 1
+//                 }
+//             }
+//         })
+        
+//         userData.save((err, data) => {
+//             debugger
+//             err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })
+//         })
+//     })
+// })
 
 module.exports = router 

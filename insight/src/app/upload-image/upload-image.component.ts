@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadModelModule } from '../upload-model/upload.module';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-upload-image',
@@ -8,7 +9,7 @@ import { UploadModelModule } from '../upload-model/upload.module';
 })
 export class UploadImageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<UploadImageComponent>) { }
 
   isHovering: boolean;
 
@@ -27,6 +28,10 @@ export class UploadImageComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
     }
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
 
