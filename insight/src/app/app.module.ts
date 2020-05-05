@@ -23,6 +23,8 @@ import { SpecialsComponent } from './specials/specials.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { DropzoneDirective } from './directives/dropzone.directive';
 import { UploadTaskComponent } from './upload-task/upload-task.component';
+import { VeiwImageComponent } from './veiw-image/veiw-image.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -38,7 +40,8 @@ firebase.initializeApp(environment.firebaseConfig);
     UserProfileComponent,
     SpecialsComponent,
     DropzoneDirective,
-    UploadTaskComponent
+    UploadTaskComponent,
+    VeiwImageComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,7 @@ firebase.initializeApp(environment.firebaseConfig);
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'specials', component: SpecialsComponent, canActivate: [AuthGuard] },
+      { path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'error' },
 
     ]),
@@ -62,6 +65,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    MatDialogModule,
 
   ],
   providers: [userService, AuthGuard, {
@@ -69,6 +73,7 @@ firebase.initializeApp(environment.firebaseConfig);
     useClass: TokenInterceptorService,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [VeiwImageComponent]
 })
 export class AppModule { }

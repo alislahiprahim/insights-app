@@ -41,4 +41,7 @@ export class userService {
     uploadImage(data) {
         return this.myhttpClient.post(this.backendURL + 'uploadImage', data)
     }
+    getUserImage(data) {
+        return this.myhttpClient.post(this.backendURL + 'getUserImages', data)
+    }
 }

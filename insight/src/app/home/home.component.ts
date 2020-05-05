@@ -1,8 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 import { userService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VeiwImageComponent } from '../veiw-image/veiw-image.component';
+import lodash from 'lodash'
+
+export interface DialogData {
+  imageUrl: string
+}
 
 @Component({
   selector: 'app-home',
@@ -11,28 +18,49 @@ import { DOCUMENT } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  imageArr: any
+  userArray: any;
 
-  constructor(private myuserService: userService, private myRouter:Router,@Inject(DOCUMENT) private _document) { }
+  constructor(private myuserService: userService, private dialog: MatDialog, private MyelementRef: ElementRef, private myRouter: Router, @Inject(DOCUMENT) private _document) { }
+
+  ngAfterViewInit() {
+    this.MyelementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#e5e5e5'
+  }
 
   ngOnInit() {
-   
-    if (this.imageArr) { } else {
-      this.getImages()
+
+    if (this.userArray) { } else {
+      this.getUsers()
     }
   }
 
 
-  getImages() {
+  getUsers() {
     this.myuserService.getImages().subscribe((resp: any) => {
+      this.userArray = resp.data
 
-      this.imageArr = resp.data
     }, (err: any) => {
-      if (err instanceof HttpErrorResponse){
-        if(err.status === 401){
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
           this.myRouter.navigate(['/login'])
         }
       }
     })
   }
+
+  openDialog(url): void {
+
+    const dialogRef = this.dialog.open(VeiwImageComponent, {
+      data: { imageUrl: url }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  userProfile(userid) {
+    this.myRouter.navigate(['/profile', userid])
+  }
 }
+
+

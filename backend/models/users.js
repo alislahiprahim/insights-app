@@ -6,7 +6,12 @@ usermodel = mongoose.model('Users', {
     username: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Images' }]
+    image: [{
+
+        url: String,
+        date: { type: Date, default: Date.now }
+
+    }]
 
 })
 

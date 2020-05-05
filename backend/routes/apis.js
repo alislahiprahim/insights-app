@@ -1,24 +1,23 @@
 const mongoose = require("mongoose"),
     express = require("express"),
+    lodash = require('lodash'),
     router = express.Router(),
     userModel = require('../models/users'),
-    imageModel = require('../models/images'),
     jwt = require('jsonwebtoken')
 
 
 
 function verifyToken(req, resp, next) {
-    
     if (!req.headers.authorization) {
         resp.status(401).send('unauthorized request')
     }
-    let token = req.headers.authorization.split(' ')[1]
+    var token = req.headers.authorization.split(' ')[1];
     if (token === 'null') {
 
         resp.status(401).send('unauthorized request')
 
     }
-    let payload = jwt.verify(token, 'secretKey')
+    var payload = jwt.verify(token, 'secretKey')
 
     if (!payload) {
         return resp.status(401).send('unauthorized request')
@@ -69,30 +68,33 @@ router.post('/login', (req, resp) => {
 })
 
 
-router.post("/uploadImage", (req, resp) => {
+router.post("/uploadImage", verifyToken, async (req, resp) => {
 
     const { Url } = req.body
-    
-    const image = new imageModel({
-
-        _id: mongoose.Types.ObjectId(),
-        Url: Url,
-
-    })
-    image.save((err, data) => {
-
-        err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })
-
-    })
+    const { userId } = req
+    debugger
+    let userData = await userModel.findOne({ _id: userId })
+    userData.image.push({ url: Url, date: Date.now() })
+    const user = await userData.save()
+    resp.json({ result: user })
 
 });
 
-router.get('/getImages', verifyToken,(req, resp) => {
+router.get('/getImages', verifyToken, (req, resp) => {
 
-    imageModel.find({}).exec((err, data) => {
-
+    userModel.find({}).exec((err, data) => {
         err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })
+    })
 
+
+})
+
+router.post('/getUserImages', verifyToken, (req, resp) => {
+
+    const { id } = req.body
+
+    userModel.findOne({ _id: id }).exec((err, data) => {
+        err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', images: data.image })
     })
 
 })

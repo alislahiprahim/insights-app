@@ -1,0 +1,10 @@
+<div class="dialog">
+    <img class=" image-dialog" src="{{data.imageUrl}}">
+    <div class="close">
+        <i class="fas fa-times" (click)="onNoClick()"></i>
+    </div>
+    <div class="download">
+        <a [href]="data.imageUrl" target="_blank" rel="noopener"><i class="fas fa-download"></i></a>
+        
+    </div>
+</div>

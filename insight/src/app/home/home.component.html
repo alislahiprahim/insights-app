@@ -1,10 +1,36 @@
-<div class="container mx-auto" style='margin-top:140px '>
-    <div class="cards" *ngFor="let i of imageArr">
-        <div class="card "> <img class="card-img-top" src="{{i.Url}}" alt="Card image cap">
-            <div class="cover">
-                <h5 class="date">{{i.date |date:'shortDate'}}</h5>
-                <button class="float-right" mat-flat-button color=accent [routerLink]="['/specials']"
-                    routerLinkActive="router-link-active">special content</button>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 " *ngFor="let i of userArray">
+            <div class="card my-2 mx-2">
+                <div class="card-body">
+                    <div class="card-image ">
+                        <div>
+                            <img class="image" src="{{i.image[0].url}}">
+                        </div>
+                        <div class="image-layer mx-auto">
+                            <div class="icons">
+                                <i class="far fa-eye mx-2" (click)="openDialog(i.image[0].url)"></i>
+                                <i class="fas fa-share mx-2" (click)='userProfile(i._id)'></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-title my-2 py-1 px-2">
+                        <h3>{{i.username}}</h3>
+                    </div>
+                    <div class="card-footer mx-auto my-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <h4>64.34</h4>
+                            </div>
+                            <div class="col-4">
+                                <h4>692</h4>
+                            </div>
+                            <div class="col-4">
+                                <h4>7</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,1 +1,20 @@
-<app-upload-image></app-upload-image>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 " *ngFor="let i of imageArr">
+            <div class="card my-2 mx-2">
+                <div class="card-body">
+                    <div class="card-image ">
+                        <div>
+                            <img class="image" src="{{i.url}}">
+                        </div>
+                    </div>
+                    <div class="mx-auto my-3">
+                        <div class="row">
+                            <h5> {{i.date | date:'medium'}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
