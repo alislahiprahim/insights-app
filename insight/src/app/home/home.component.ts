@@ -18,7 +18,9 @@ export interface DialogData {
 export class HomeComponent implements OnInit {
 
   userArray: any;
-
+  url: string = ''
+  emailStyle: boolean = false;
+  emaildata: any;
   constructor(private myuserService: userService, private dialog: MatDialog, private MyelementRef: ElementRef, private myRouter: Router, @Inject(DOCUMENT) private _document) { }
 
   ngAfterViewInit() {
@@ -58,6 +60,21 @@ export class HomeComponent implements OnInit {
 
   OnRightClick() {
     return false;
+  }
+
+  submit() {
+    if (this.emailStyle == false) {
+      this.emailStyle = true
+    } else {
+      this.emailStyle = false
+    }
+  }
+
+  Sendmail() {
+    const { emaildata } = this
+    this.myuserService.sendMail({ emaildata: emaildata }).subscribe((resp) => {
+      console.log(resp)
+    })
   }
 }
 

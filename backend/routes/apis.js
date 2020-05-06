@@ -3,7 +3,20 @@ const mongoose = require("mongoose"),
     lodash = require('lodash'),
     router = express.Router(),
     userModel = require('../models/users'),
-    jwt = require('jsonwebtoken')
+    jwt = require('jsonwebtoken'),
+    nodemailer = require('nodemailer'),
+    Emailconfig = require('../config.json')
+
+
+//email setup
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    auth: {
+        user: Emailconfig.email,
+        pass: Emailconfig.password
+    }
+})
 
 
 
@@ -99,6 +112,30 @@ router.post('/getUserImages', verifyToken, (req, resp) => {
 
 })
 
+
+router.post('/sendemail', verifyToken, async (req, resp) => {
+
+    const { emaildata } = req.body
+    const { userId } = req
+    userData = await userModel.findOne({ _id: userId })
+
+    var mailOptions = {
+        from: userData.email,
+        to: Emailconfig.email,
+        username: userData.username,
+        subject: `${userData.username} inights user`,
+        text: emaildata
+    };
+
+    transporter.sendMail(mailOptions, (err, data) => {
+        err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })
+
+    })
+
+});
+
+
+
 // router.post('/rate', verifyToken, (req, resp) => {
 
 //     const { userId, imageid, r } = req.body
@@ -111,7 +148,7 @@ router.post('/getUserImages', verifyToken, (req, resp) => {
 //                 }
 //             }
 //         })
-        
+
 //         userData.save((err, data) => {
 //             debugger
 //             err ? resp.json({ message: 'error' }) : resp.json({ message: 'success', data })

@@ -26,9 +26,9 @@
 }
 .card-image:hover > .image-layer {
   opacity: 1;
-  .icons{
+  .icons {
     opacity: 1;
-    top:50%;
+    top: 50%;
   }
 }
 .image-layer {
@@ -40,7 +40,7 @@
   height: 100%;
   z-index: 123;
   opacity: 0;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
 }
 .image-layer .icons {
   position: absolute;
@@ -49,7 +49,7 @@
   border: 0px;
   padding: 10px;
   opacity: 0;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
 }
 .icons i {
   padding: 20px;
@@ -58,10 +58,39 @@
   color: #fff;
   font-size: 24px;
   background-color: #006fff;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 }
-.icons i:hover{
-
+.icons i:hover {
   background-color: #0856bd;
+}
 
+.emailIcon {
+  position: fixed;
+  top: 87%;
+  left: 90%;
+  transition: all 0.3s ease-in;
+}
+.emailIcon button {
+  padding: 20px;
+  background-color: #d32809;
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+}
+
+.emailContanier {
+
+  position: absolute;
+  top: -90%;
+  left: -210%;
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+.emailContanier2 {
+  position: absolute;
+  top: -180%;
+  left: -210%;
+  opacity: 1;
+  transition: all 0.3s ease-in;
 }
