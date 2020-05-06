@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class userService {
 
-    backendURL = 'http://localhost:8085/api/'
+    backendURL = 'api/'
 
     constructor(private myhttpClient: HttpClient) { }
 

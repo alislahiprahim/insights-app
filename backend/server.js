@@ -13,4 +13,5 @@ app.use('/api', api)
 
 
 
-app.listen(8085)
+const port = process.env.PORT || 8080
+app.listen(8080)
